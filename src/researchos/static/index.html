@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f9">
+  <title>ResearchOS — Research workspace</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/"><span class="brand-icon">R<span>✳</span></span>Research<span class="brand-light">OS</span></a>
+    <button id="new-session" class="primary full"><span>＋</span> New research</button>
+    <div class="sidebar-label">YOUR WORKSPACE <button id="refresh-list" class="icon-button" aria-label="Refresh sessions">↻</button></div>
+    <nav id="sessions" aria-label="Saved research sessions"></nav>
+    <button id="load-more" class="secondary full" hidden>Load more</button>
+    <div class="sidebar-footer"><span class="status-dot"></span> Local workspace <a href="/docs" target="_blank" rel="noopener">API ↗</a></div>
+  </aside>
+  <main>
+    <header class="topbar"><span>Workspace <span class="separator">/</span> <strong>Research</strong></span><span class="pill">Discovery to evidence</span></header>
+    <div class="content">
+      <div id="notice" role="status" aria-live="polite" hidden></div>
+      <section id="welcome">
+        <div class="eyebrow">FROM QUESTIONS TO EVIDENCE</div>
+        <h1>A home for your<br>next discovery<span class="accent">.</span></h1>
+        <p class="intro">Start with a question. Build a research trail you can follow.</p>
+        <form id="research-form" class="question-card">
+          <label for="question">What would you like to investigate?</label>
+          <textarea id="question" name="question" minlength="3" maxlength="4000" required placeholder="How can we reliably evaluate retrieval-augmented generation systems?"></textarea>
+          <details class="budget"><summary>Research budget <span>Optional limits</span></summary><div class="budget-fields">
+            <label>Searches<input name="max_searches" type="number" min="1" max="100" value="20" required></label>
+            <label>Sources<input name="max_sources" type="number" min="1" max="100" value="20" required></label>
+            <label>Tokens<input name="max_tokens" type="number" min="1" max="1000000" value="200000" required></label>
+          </div><p class="small muted">Search and source limits are enforced. The token limit caps model use when a model is configured.</p></details>
+          <div class="form-footer"><span class="small muted">Your question is saved in this workspace.</span><button id="create" class="primary" type="submit">Start research <span>↗</span></button></div>
+        </form>
+        <div class="eyebrow examples-label">A FEW PLACES TO START</div>
+        <div class="examples">
+          <button class="example" data-question="What are the main approaches to evaluating RAG systems?"><span class="example-icon">◎</span><strong>Explore a research area</strong><span>Compare approaches to RAG evaluation.</span><b>↗</b></button>
+          <button class="example" data-question="How do small open-source models compare as LLM judges?"><span class="example-icon">⇄</span><strong>Compare methods</strong><span>Investigate small models as LLM judges.</span><b>↗</b></button>
+          <button class="example" data-question="What limits the reproducibility of current agent benchmarks?"><span class="example-icon">⌘</span><strong>Find open questions</strong><span>Examine reproducibility in agent benchmarks.</span><b>↗</b></button>
+        </div>
+        <div class="foundation-note"><span>ⓘ</span><p><strong>Every investigation starts with a plan.</strong> Discover academic sources and, when configured, web results, then read them in full. Evidence extraction and cited reports are the next milestones.</p></div>
+      </section>
+      <section id="workspace" hidden aria-label="Research session">
+        <div class="session-heading"><div><div class="eyebrow">RESEARCH SESSION</div><h1 id="session-title" tabindex="-1"></h1><p id="session-date" class="muted small"></p></div><button id="continue" class="primary">Continue discovery</button><button id="read" class="primary">Read sources</button><button id="analyze" class="primary">Analyze evidence</button><button id="refresh-session" class="secondary">↻ Refresh</button></div>
+        <div class="session-banner"><span class="status-dot"></span><div><strong id="session-status"></strong><p id="status-description"></p></div></div>
+        <div id="metrics" class="metrics"></div>
+        <div class="tabs" role="tablist" aria-label="Research details">
+          <button id="tab-plan" role="tab" aria-controls="panel" aria-selected="true" data-tab="plan">Research plan</button>
+          <button id="tab-sources" role="tab" aria-controls="panel" aria-selected="false" tabindex="-1" data-tab="sources">Sources</button>
+          <button id="tab-passages" role="tab" aria-controls="panel" aria-selected="false" tabindex="-1" data-tab="passages">Passages</button>
+          <button id="tab-evidence" role="tab" aria-controls="panel" aria-selected="false" tabindex="-1" data-tab="evidence">Claims & evidence</button>
+          <button id="tab-timeline" role="tab" aria-controls="panel" aria-selected="false" tabindex="-1" data-tab="timeline">Timeline</button>
+          <button id="tab-report" role="tab" aria-controls="panel" aria-selected="false" tabindex="-1" data-tab="report">Report</button>
+        </div>
+        <div id="panel" role="tabpanel" aria-labelledby="tab-plan" tabindex="0"></div>
+        <footer class="session-actions"><button id="export" class="secondary">↓ Export session</button><span class="spacer"></span><button id="delete" class="danger">Delete session</button></footer>
+      </section>
+      <footer class="page-footer">ResearchOS <span>Evidence over eloquence.</span></footer>
+    </div>
+  </main>
+</body>
+</html>

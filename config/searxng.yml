@@ -1,0 +1,8 @@
+use_default_settings: true
+server:
+  secret_key: "researchos-local-development-only"
+  limiter: false
+search:
+  formats:
+    - html
+    - json
